@@ -28,14 +28,6 @@ def parse_tag_input(input):
 
     input = force_unicode(input)
 
-    # Special case - if there are no commas or double quotes in the
-    # input, we don't *do* a recall... I mean, we know we only need to
-    # split on spaces.
-    if u',' not in input and u'"' not in input:
-        words = list(set(split_strip(input, u' ')))
-        words.sort()
-        return words
-
     words = []
     buffer = []
     # Defer splitting of non-quoted sections until we know if there are
@@ -75,10 +67,7 @@ def parse_tag_input(input):
                 saw_loose_comma = True
             to_be_split.append(u''.join(buffer))
     if to_be_split:
-        if saw_loose_comma:
-            delimiter = u','
-        else:
-            delimiter = u' '
+        delimiter = u','
         for chunk in to_be_split:
             words.extend(split_strip(chunk, delimiter))
     words = list(set(words))
