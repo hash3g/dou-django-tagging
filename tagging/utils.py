@@ -102,18 +102,14 @@ def edit_string_for_tags(tags):
     use_commas = False
     for tag in tags:
         name = tag.name
-        if u',' in name:
-            names.append('"%s"' % name)
-            continue
-        elif u' ' in name:
-            if not use_commas:
-                use_commas = True
+        # if u',' in name:
+        #     names.append('"%s"' % name)
+        #     continue
+        # elif u' ' in name:
+        #     if not use_commas:
+        #         use_commas = True
         names.append(name)
-    if use_commas:
-        glue = u', '
-    else:
-        glue = u' '
-    return glue.join(names)
+    return u', '.join(names)
 
 def get_queryset_and_model(queryset_or_model):
     """
